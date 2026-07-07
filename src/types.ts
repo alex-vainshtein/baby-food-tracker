@@ -29,6 +29,25 @@ export type TrackerState = Record<string, ProductTracking>
 export type SortField = 'name' | 'count' | 'lastGiven'
 export type SortDirection = 'asc' | 'desc'
 
+export interface Kit {
+  id: string
+  name: string
+  dateOfBirth: string
+  syncId: string
+  state: TrackerState
+}
+
+export interface KitsData {
+  kits: Kit[]
+  activeKitId: string | null
+}
+
+export interface KitMeta {
+  name: string
+  dateOfBirth: string
+}
+
+export const KITS_STORAGE_KEY = 'baby-food-tracker-kits'
 export const STORAGE_KEY = 'baby-food-tracker'
 export const SYNC_ID_STORAGE_KEY = 'baby-food-tracker-sync-id'
 export const SYNC_PANEL_COLLAPSED_KEY = 'baby-food-tracker-sync-collapsed'

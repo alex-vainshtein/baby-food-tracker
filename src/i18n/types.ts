@@ -70,5 +70,20 @@ export interface UiStrings {
   lastGivenTooltip: (date: string, count: number) => string
   neverGivenTooltip: string
   syncToggleLabel: string
+  syncInviteLabel: string
+  syncInviteCopy: string
+  syncInviteCopied: string
+  defaultKitName: string
+  kitSwitcherLabel: string
+  kitSelectLabel: string
+  kitAdd: string
+  kitCancelAdd: string
+  kitCreate: string
+  kitNameLabel: string
+  kitNamePlaceholder: string
+  kitDobLabel: string
+  kitAgeMonths: (months: number) => string
+  kitSubtitle: (name: string) => string
+  kitSubtitleWithAge: (name: string, months: number) => string
   categories: Record<string, string>
 }

@@ -1,9 +1,10 @@
-import type { TrackerState } from '../types'
+import type { KitMeta, TrackerState } from '../types'
 import { mergeTrackerState } from './mergeState'
 
 export interface SyncPayload {
   state: TrackerState
   updatedAt: number
+  meta?: KitMeta
 }
 
 const SYNC_ID_PATTERN = /^[A-Z2-9]{4}-[A-Z2-9]{4}$/
@@ -25,6 +26,30 @@ export function generateSyncId(): string {
   return `${code.slice(0, 4)}-${code.slice(4)}`
 }
 
+export function buildInviteLink(syncId: string): string {
+  const url = new URL(window.location.href)
+  url.search = ''
+  url.hash = ''
+  url.searchParams.set('join', syncId)
+  return url.toString()
+}
+
+export function parseJoinCodeFromUrl(): string | null {
+  const params = new URLSearchParams(window.location.search)
+  const join = params.get('join')
+  if (!join) return null
+  const normalized = normalizeSyncId(join)
+  return isValidSyncId(normalized) ? normalized : null
+}
+
+export function clearJoinParamFromUrl() {
+  const url = new URL(window.location.href)
+  if (!url.searchParams.has('join')) return
+  url.searchParams.delete('join')
+  const next = `${url.pathname}${url.search}${url.hash}`
+  window.history.replaceState({}, '', next)
+}
+
 async function fetchPayload(syncId: string): Promise<SyncPayload> {
   const response = await fetch(`/api/sync/${encodeURIComponent(syncId)}`)
   if (!response.ok) {
@@ -44,17 +69,32 @@ async function putPayload(syncId: string, payload: SyncPayload): Promise<void> {
   }
 }
 
-export async function pullRemoteState(syncId: string): Promise<TrackerState> {
+export async function pullRemote(syncId: string): Promise<SyncPayload> {
   const payload = await fetchPayload(syncId)
-  return payload.state ?? {}
+  return {
+    state: payload.state ?? {},
+    updatedAt: payload.updatedAt ?? 0,
+    meta: payload.meta,
+  }
+}
+
+export async function pullRemoteState(syncId: string): Promise<TrackerState> {
+  const payload = await pullRemote(syncId)
+  return payload.state
 }
 
 export async function pushMergedState(
   syncId: string,
   localState: TrackerState,
-): Promise<TrackerState> {
+  meta?: KitMeta,
+): Promise<SyncPayload> {
   const remote = await fetchPayload(syncId)
   const merged = mergeTrackerState(localState, remote.state ?? {})
-  await putPayload(syncId, { state: merged, updatedAt: Date.now() })
-  return merged
+  const payload: SyncPayload = {
+    state: merged,
+    updatedAt: Date.now(),
+    meta: meta ?? remote.meta,
+  }
+  await putPayload(syncId, payload)
+  return payload
 }

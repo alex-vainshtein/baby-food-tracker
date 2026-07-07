@@ -6,12 +6,23 @@ const SYNC_ID_PATTERN = /^[A-Z2-9]{4}-[A-Z2-9]{4}$/
 interface SyncPayload {
   state: Record<string, unknown>
   updatedAt: number
+  meta?: {
+    name: string
+    dateOfBirth: string
+  }
 }
 
 function isValidPayload(body: unknown): body is SyncPayload {
   if (!body || typeof body !== 'object') return false
   const payload = body as SyncPayload
-  return typeof payload.state === 'object' && typeof payload.updatedAt === 'number'
+  if (typeof payload.state !== 'object' || typeof payload.updatedAt !== 'number') return false
+  if (payload.meta !== undefined) {
+    if (typeof payload.meta !== 'object' || payload.meta === null) return false
+    if (typeof payload.meta.name !== 'string' || typeof payload.meta.dateOfBirth !== 'string') {
+      return false
+    }
+  }
+  return true
 }
 
 export default async (req: Request, context: Context) => {

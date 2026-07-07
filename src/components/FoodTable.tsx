@@ -1,12 +1,14 @@
 import { useMemo, useState } from 'react'
 import productsData from '../../data/products.json'
 import type { FoodCategory, Product, SortDirection, SortField } from '../types'
-import { useFoodTracker } from '../hooks/useFoodTracker'
+import { useKitTracker } from '../hooks/KitTrackerContext'
 import { useI18n } from '../i18n/I18nContext'
+import { calcAgeInMonths } from '../storage/kitAge'
 import { Filters } from './Filters'
 import { FoodRow } from './FoodRow'
 import { ProgressBar } from './ProgressBar'
 import { LanguageSwitcher } from './LanguageSwitcher'
+import { KitSwitcher } from './KitSwitcher'
 import { SyncPanel } from './SyncPanel'
 
 const products = productsData as Product[]
@@ -19,19 +21,7 @@ const LOCALE_MAP: Record<string, string> = {
 }
 
 export function FoodTable() {
-  const {
-    getTracking,
-    increment,
-    decrement,
-    giveToday,
-    syncId,
-    syncStatus,
-    syncError,
-    createSync,
-    connectSync,
-    disconnectSync,
-    syncNow,
-  } = useFoodTracker()
+  const { getTracking, increment, decrement, giveToday, activeKit } = useKitTracker()
   const { t, productName, locale } = useI18n()
 
   const [search, setSearch] = useState('')
@@ -40,6 +30,13 @@ export function FoodTable() {
   const [allergensOnly, setAllergensOnly] = useState(false)
   const [sortField, setSortField] = useState<SortField>('name')
   const [sortDirection, setSortDirection] = useState<SortDirection>('asc')
+
+  const subtitle = useMemo(() => {
+    if (!activeKit) return t.pageSubtitle
+    const months = calcAgeInMonths(activeKit.dateOfBirth)
+    if (months === null) return t.kitSubtitle(activeKit.name)
+    return t.kitSubtitleWithAge(activeKit.name, months)
+  }, [activeKit, t])
 
   const triedCount = useMemo(
     () => products.filter((p) => getTracking(p.id).count >= 1).length,
@@ -102,23 +99,17 @@ export function FoodTable() {
         <div className="page-header__top">
           <div>
             <h1>{t.pageTitle}</h1>
-            <p className="page-header__subtitle">{t.pageSubtitle}</p>
+            <p className="page-header__subtitle">{subtitle}</p>
           </div>
           <LanguageSwitcher />
         </div>
       </header>
 
+      <KitSwitcher />
+
       <ProgressBar products={products} triedCount={triedCount} />
 
-      <SyncPanel
-        syncId={syncId}
-        syncStatus={syncStatus}
-        syncError={syncError}
-        onCreateSync={createSync}
-        onConnectSync={connectSync}
-        onDisconnectSync={disconnectSync}
-        onSyncNow={syncNow}
-      />
+      <SyncPanel />
 
       <Filters
         search={search}

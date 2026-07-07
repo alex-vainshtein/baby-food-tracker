@@ -1,17 +1,8 @@
 import { useState } from 'react'
-import type { SyncStatus } from '../hooks/useFoodTracker'
+import { useKitTracker } from '../hooks/KitTrackerContext'
 import { useI18n } from '../i18n/I18nContext'
 import { SYNC_PANEL_COLLAPSED_KEY } from '../types'
-
-interface SyncPanelProps {
-  syncId: string | null
-  syncStatus: SyncStatus
-  syncError: string | null
-  onCreateSync: () => Promise<string>
-  onConnectSync: (code: string) => Promise<boolean>
-  onDisconnectSync: () => void
-  onSyncNow: () => Promise<void>
-}
+import { buildInviteLink } from '../storage/syncApi'
 
 function loadCollapsed(): boolean {
   try {
@@ -27,20 +18,17 @@ function saveCollapsed(collapsed: boolean) {
   localStorage.setItem(SYNC_PANEL_COLLAPSED_KEY, String(collapsed))
 }
 
-export function SyncPanel({
-  syncId,
-  syncStatus,
-  syncError,
-  onCreateSync,
-  onConnectSync,
-  onDisconnectSync,
-  onSyncNow,
-}: SyncPanelProps) {
+export function SyncPanel() {
   const { t } = useI18n()
+  const { activeKit, syncStatus, syncError, joinKitBySyncCode, syncNow } = useKitTracker()
   const [collapsed, setCollapsed] = useState(loadCollapsed)
   const [inputCode, setInputCode] = useState('')
-  const [copied, setCopied] = useState(false)
+  const [copiedCode, setCopiedCode] = useState(false)
+  const [copiedLink, setCopiedLink] = useState(false)
   const [isBusy, setIsBusy] = useState(false)
+
+  const syncId = activeKit?.syncId ?? null
+  const inviteLink = syncId ? buildInviteLink(syncId) : null
 
   const statusLabel = (() => {
     switch (syncStatus) {
@@ -63,23 +51,12 @@ export function SyncPanel({
     })
   }
 
-  async function handleCreate() {
-    setIsBusy(true)
-    try {
-      await onCreateSync()
-      setCollapsed(false)
-      saveCollapsed(false)
-    } finally {
-      setIsBusy(false)
-    }
-  }
-
   async function handleConnect(event: React.FormEvent) {
     event.preventDefault()
     if (!inputCode.trim()) return
     setIsBusy(true)
     try {
-      const ok = await onConnectSync(inputCode)
+      const ok = await joinKitBySyncCode(inputCode)
       if (ok) {
         setInputCode('')
         setCollapsed(false)
@@ -90,19 +67,30 @@ export function SyncPanel({
     }
   }
 
-  async function handleCopy() {
+  async function handleCopyCode() {
     if (!syncId) return
     try {
       await navigator.clipboard.writeText(syncId)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
+      setCopiedCode(true)
+      setTimeout(() => setCopiedCode(false), 2000)
+    } catch {
+      // Clipboard may be unavailable on some mobile browsers.
+    }
+  }
+
+  async function handleCopyLink() {
+    if (!inviteLink) return
+    try {
+      await navigator.clipboard.writeText(inviteLink)
+      setCopiedLink(true)
+      setTimeout(() => setCopiedLink(false), 2000)
     } catch {
       // Clipboard may be unavailable on some mobile browsers.
     }
   }
 
   const summary = syncId
-    ? `${syncId}${statusLabel ? ` · ${statusLabel}` : ''}`
+    ? `${activeKit?.name ?? ''}${statusLabel ? ` · ${statusLabel}` : ''}`
     : t.syncDescription
 
   return (
@@ -124,20 +112,44 @@ export function SyncPanel({
       </button>
 
       <div id="sync-panel-body" className="sync-panel__body" hidden={collapsed}>
-        {syncId ? (
+        {syncId && (
           <div className="sync-panel__active">
+            <p className="sync-panel__description">{t.syncDescription}</p>
+
             <div className="sync-panel__code-row">
               <span className="sync-panel__label">{t.syncCodeLabel}</span>
               <code className="sync-panel__code">{syncId}</code>
               <button
                 type="button"
                 className="btn btn--ghost"
-                onClick={() => void handleCopy()}
+                onClick={() => void handleCopyCode()}
                 disabled={isBusy}
               >
-                {copied ? t.syncCopied : t.syncCopy}
+                {copiedCode ? t.syncCopied : t.syncCopy}
               </button>
             </div>
+
+            {inviteLink && (
+              <div className="sync-panel__invite">
+                <span className="sync-panel__label">{t.syncInviteLabel}</span>
+                <div className="sync-panel__invite-row">
+                  <input
+                    className="sync-panel__invite-input"
+                    value={inviteLink}
+                    readOnly
+                    onFocus={(e) => e.target.select()}
+                  />
+                  <button
+                    type="button"
+                    className="btn btn--primary"
+                    onClick={() => void handleCopyLink()}
+                    disabled={isBusy}
+                  >
+                    {copiedLink ? t.syncInviteCopied : t.syncInviteCopy}
+                  </button>
+                </div>
+              </div>
+            )}
 
             {statusLabel && (
               <p
@@ -154,60 +166,36 @@ export function SyncPanel({
                 className="btn btn--ghost"
                 onClick={() => {
                   setIsBusy(true)
-                  void onSyncNow().finally(() => setIsBusy(false))
+                  void syncNow().finally(() => setIsBusy(false))
                 }}
                 disabled={isBusy}
               >
                 {t.syncNow}
               </button>
-              <button
-                type="button"
-                className="btn btn--ghost btn--danger"
-                onClick={onDisconnectSync}
-                disabled={isBusy}
-              >
-                {t.syncDisconnect}
-              </button>
             </div>
           </div>
-        ) : (
-          <div className="sync-panel__setup">
-            <p className="sync-panel__description">{t.syncDescription}</p>
-            <button
-              type="button"
-              className="btn btn--primary"
-              onClick={() => void handleCreate()}
-              disabled={isBusy}
-            >
-              {t.syncCreate}
-            </button>
-
-            <form className="sync-panel__connect" onSubmit={(e) => void handleConnect(e)}>
-              <label className="sync-panel__label" htmlFor="sync-code">
-                {t.syncConnectLabel}
-              </label>
-              <div className="sync-panel__connect-row">
-                <input
-                  id="sync-code"
-                  className="sync-panel__input"
-                  value={inputCode}
-                  onChange={(e) => setInputCode(e.target.value.toUpperCase())}
-                  placeholder={t.syncConnectPlaceholder}
-                  autoComplete="off"
-                  spellCheck={false}
-                  disabled={isBusy}
-                />
-                <button
-                  type="submit"
-                  className="btn btn--ghost"
-                  disabled={isBusy || !inputCode.trim()}
-                >
-                  {t.syncConnect}
-                </button>
-              </div>
-            </form>
-          </div>
         )}
+
+        <form className="sync-panel__connect" onSubmit={(e) => void handleConnect(e)}>
+          <label className="sync-panel__label" htmlFor="sync-code">
+            {t.syncConnectLabel}
+          </label>
+          <div className="sync-panel__connect-row">
+            <input
+              id="sync-code"
+              className="sync-panel__input"
+              value={inputCode}
+              onChange={(e) => setInputCode(e.target.value.toUpperCase())}
+              placeholder={t.syncConnectPlaceholder}
+              autoComplete="off"
+              spellCheck={false}
+              disabled={isBusy}
+            />
+            <button type="submit" className="btn btn--ghost" disabled={isBusy || !inputCode.trim()}>
+              {t.syncConnect}
+            </button>
+          </div>
+        </form>
 
         {syncError && (
           <p className="sync-panel__error" role="alert">

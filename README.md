@@ -2,7 +2,7 @@
 
 A simple baby complementary-feeding tracker. Log how many times you've offered each food while working toward the **~100 foods before age one** goal.
 
-Built from the [*Мінікурс 6 міс*](Мінікурс%206%20міс.pdf) course menu (@prukorm.tarilochku). Runs as a static web app with optional cloud sync via Netlify.
+Runs as a static web app with optional cloud sync via Netlify.
 
 **Live use:** works on phone and laptop; installable via “Add to Home Screen” after deploying.
 
