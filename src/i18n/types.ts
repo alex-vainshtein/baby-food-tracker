@@ -22,6 +22,7 @@ export interface UiStrings {
   pageTitle: string
   pageSubtitle: string
   progressTitle: string
+  progressGoal: (tried: number, goal: number) => string
   progressCatalog: (total: number) => string
   searchPlaceholder: string
   searchAria: string
@@ -87,6 +88,16 @@ export interface UiStrings {
   kitSubtitle: (name: string) => string
   kitSubtitleWithAge: (name: string, months: number) => string
   productGuidanceLabel: string
+  productNotesLabel: string
+  productNotesPlaceholder: string
+  productNotesAria: (name: string) => string
+  todaySummaryTitle: string
+  todayGivenLabel: string
+  todayGivenEmpty: string
+  todayUntriedLabel: string
+  todayUntriedEmpty: string
+  dayRecFollowAge: string
+  dayRecManualOverride: string
   dayRecTitle: string
   dayRecDayLabel: (day: number) => string
   dayRecPrevDay: string
@@ -100,5 +111,51 @@ export interface UiStrings {
   dayRecFocusUntried: (names: string) => string
   dayRecAllNew: string
   dayRecPlanComplete: string
+  catalogToggleLabel: string
+  catalogTitle: string
+  catalogDescription: string
+  catalogVisibleCount: (visible: number, total: number) => string
+  catalogExcludeTitle: string
+  catalogSearchPlaceholder: string
+  catalogNoMatches: string
+  catalogExclude: string
+  catalogInclude: string
+  catalogExcludedTitle: string
+  catalogCustomTitle: string
+  catalogCustomHint: string
+  catalogCustomNameLabel: string
+  catalogCustomNamePlaceholder: string
+  catalogCustomCategoryLabel: string
+  catalogCustomAllergen: string
+  catalogCustomAdd: string
+  catalogCustomEmpty: string
+  catalogCustomRemove: string
+  catalogExcludedRowTooltip: string
+  guidelinesTitle: string
+  guidelinesWhenToStart: string
+  guidelinesPortion: string
+  guidelinesMilkSolids: string
+  guidelinesHealthyPlate: string
+  guidelinesVariety: string
+  guidelinesTextureTitle: string
+  guidelinesTextureMonth: (month: number, texture: string) => string
+  guidelinesForbiddenTitle: string
+  allergenTrackerTitle: string
+  allergenTrackerActive: string
+  allergenTrackerUpcoming: string
+  allergenTrackerDone: string
+  allergenTrackerDays: (days: string) => string
+  allergenTrackerDayDose: (day: number, dose: string) => string
+  exportTitle: string
+  exportJson: string
+  exportCsv: string
+  importLabel: string
+  importButton: string
+  importSuccess: string
+  importError: string
+  kitDelete: string
+  kitDeleteConfirm: string
+  syncLastSynced: (when: string) => string
+  syncNeverSynced: string
   categories: Record<string, string>
 }

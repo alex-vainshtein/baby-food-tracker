@@ -17,6 +17,16 @@ function emptyKit(name: string, syncId?: string): Kit {
     dateOfBirth: '',
     syncId: syncId ?? generateSyncId(),
     state: {},
+    excludedProductIds: [],
+    customProducts: [],
+  }
+}
+
+function normalizeKit(kit: Kit): Kit {
+  return {
+    ...kit,
+    excludedProductIds: kit.excludedProductIds ?? [],
+    customProducts: kit.customProducts ?? [],
   }
 }
 
@@ -55,7 +65,7 @@ export function loadKits(defaultName: string): KitsData {
       const parsed = JSON.parse(raw) as KitsData
       if (parsed.kits?.length) {
         return {
-          kits: parsed.kits,
+          kits: parsed.kits.map(normalizeKit),
           activeKitId: parsed.activeKitId ?? parsed.kits[0].id,
         }
       }
@@ -87,5 +97,7 @@ export function createKit(name: string, dateOfBirth: string): Kit {
     dateOfBirth,
     syncId: generateSyncId(),
     state: {},
+    excludedProductIds: [],
+    customProducts: [],
   }
 }

@@ -9,7 +9,26 @@ interface SyncPayload {
   meta?: {
     name: string
     dateOfBirth: string
+    excludedProductIds?: string[]
+    customProducts?: Array<{
+      id: string
+      name: string
+      category: string
+      isAllergen: boolean
+    }>
+    menuDayOverride?: number | null
   }
+}
+
+function isValidCustomProduct(value: unknown): boolean {
+  if (!value || typeof value !== 'object') return false
+  const p = value as Record<string, unknown>
+  return (
+    typeof p.id === 'string' &&
+    typeof p.name === 'string' &&
+    typeof p.category === 'string' &&
+    typeof p.isAllergen === 'boolean'
+  )
 }
 
 function isValidPayload(body: unknown): body is SyncPayload {
@@ -19,6 +38,27 @@ function isValidPayload(body: unknown): body is SyncPayload {
   if (payload.meta !== undefined) {
     if (typeof payload.meta !== 'object' || payload.meta === null) return false
     if (typeof payload.meta.name !== 'string' || typeof payload.meta.dateOfBirth !== 'string') {
+      return false
+    }
+    if (
+      payload.meta.excludedProductIds !== undefined &&
+      (!Array.isArray(payload.meta.excludedProductIds) ||
+        !payload.meta.excludedProductIds.every((id) => typeof id === 'string'))
+    ) {
+      return false
+    }
+    if (
+      payload.meta.customProducts !== undefined &&
+      (!Array.isArray(payload.meta.customProducts) ||
+        !payload.meta.customProducts.every(isValidCustomProduct))
+    ) {
+      return false
+    }
+    if (
+      payload.meta.menuDayOverride !== undefined &&
+      payload.meta.menuDayOverride !== null &&
+      typeof payload.meta.menuDayOverride !== 'number'
+    ) {
       return false
     }
   }

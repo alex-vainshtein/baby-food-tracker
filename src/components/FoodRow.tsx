@@ -1,16 +1,19 @@
 import type { Product, ProductTracking } from '../types'
+import { useKitTracker } from '../hooks/KitTrackerContext'
 import { useI18n } from '../i18n/I18nContext'
 import { getProductGuidance } from '../storage/productGuidance'
 
 interface FoodRowProps {
   product: Product
   tracking: ProductTracking
+  excluded?: boolean
   ageMonths: number | null
   expanded: boolean
   onToggle: () => void
   onIncrement: () => void
   onDecrement: () => void
   onGiveToday: () => void
+  onNotesChange: (notes: string) => void
 }
 
 function formatDate(iso: string | null): string {
@@ -26,19 +29,24 @@ function stopPropagation(event: React.MouseEvent) {
 export function FoodRow({
   product,
   tracking,
+  excluded = false,
   ageMonths,
   expanded,
   onToggle,
   onIncrement,
   onDecrement,
   onGiveToday,
+  onNotesChange,
 }: FoodRowProps) {
-  const { t, productName, locale } = useI18n()
-  const name = productName(product.id)
+  const { t, locale } = useI18n()
+  const { getProductDisplayName } = useKitTracker()
+  const name = getProductDisplayName(product.id)
   const givenToday = tracking.lastGivenAt === new Date().toISOString().slice(0, 10)
   const lastDate = formatDate(tracking.lastGivenAt)
-  const rowTooltip =
-    tracking.count > 0
+  const hasNotes = Boolean(tracking.notes?.trim())
+  const rowTooltip = excluded
+    ? t.catalogExcludedRowTooltip
+    : tracking.count > 0
       ? t.lastGivenTooltip(lastDate, tracking.count)
       : t.neverGivenTooltip
 
@@ -53,7 +61,7 @@ export function FoodRow({
     <>
       <tr
         id={`food-row-${product.id}`}
-        className={`food-row${tracking.count === 0 ? ' food-row--untried' : ''}${expanded ? ' food-row--expanded' : ''}`}
+        className={`food-row${tracking.count === 0 ? ' food-row--untried' : ''}${expanded ? ' food-row--expanded' : ''}${excluded ? ' food-row--excluded' : ''}`}
         title={rowTooltip}
         onClick={onToggle}
         role="button"
@@ -71,6 +79,11 @@ export function FoodRow({
             {expanded ? '▾' : '▸'}
           </span>
           <span className="food-row__title">{name}</span>
+          {hasNotes && (
+            <span className="food-row__badge food-row__badge--note" title={tracking.notes}>
+              📝
+            </span>
+          )}
           {product.isAllergen && (
             <span className="food-row__badge food-row__badge--allergen" title={t.allergenBadge}>
               ⚠
@@ -88,7 +101,7 @@ export function FoodRow({
               type="button"
               className="counter__btn"
               onClick={onDecrement}
-              disabled={tracking.count === 0}
+              disabled={excluded || tracking.count === 0}
               aria-label={t.decrementAria(name)}
             >
               −
@@ -100,6 +113,7 @@ export function FoodRow({
               type="button"
               className="counter__btn"
               onClick={onIncrement}
+              disabled={excluded}
               aria-label={t.incrementAria(name)}
             >
               +
@@ -119,6 +133,7 @@ export function FoodRow({
             type="button"
             className={`btn-give-today${givenToday ? ' btn-give-today--active' : ''}`}
             onClick={onGiveToday}
+            disabled={excluded}
           >
             {givenToday ? t.givenToday : t.giveToday}
           </button>
@@ -132,6 +147,18 @@ export function FoodRow({
               <p className="food-row__guidance-tip">
                 <strong>{t.productGuidanceLabel}</strong> {guidance.recommendation}
               </p>
+              <label className="food-row__notes">
+                <span>{t.productNotesLabel}</span>
+                <textarea
+                  value={tracking.notes ?? ''}
+                  onChange={(e) => onNotesChange(e.target.value)}
+                  onClick={stopPropagation}
+                  placeholder={t.productNotesPlaceholder}
+                  rows={2}
+                  disabled={excluded}
+                  aria-label={t.productNotesAria(name)}
+                />
+              </label>
             </div>
           </td>
         </tr>

@@ -2,11 +2,35 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { LOCALES, LOCALE_SHORT, type Locale } from '../i18n/types'
 import { calcAgeInMonths } from '../storage/kitAge'
 import { buildInviteLink } from '../storage/syncApi'
+import {
+  downloadTextFile,
+  kitExportToCsv,
+  kitExportToJson,
+  parseKitImport,
+} from '../storage/kitExport'
 import { useKitTracker } from '../hooks/KitTrackerContext'
 import { useI18n } from '../i18n/I18nContext'
+import { ProductCatalogPanel } from './ProductCatalogPanel'
+
+function formatSyncAgo(ts: number, locale: string): string {
+  const diff = Date.now() - ts
+  const mins = Math.floor(diff / 60_000)
+  if (mins < 1) {
+    return new Intl.RelativeTimeFormat(locale, { numeric: 'auto' }).format(0, 'minute')
+  }
+  if (mins < 60) {
+    return new Intl.RelativeTimeFormat(locale, { numeric: 'auto' }).format(-mins, 'minute')
+  }
+  const hours = Math.floor(mins / 60)
+  if (hours < 24) {
+    return new Intl.RelativeTimeFormat(locale, { numeric: 'auto' }).format(-hours, 'hour')
+  }
+  const days = Math.floor(hours / 24)
+  return new Intl.RelativeTimeFormat(locale, { numeric: 'auto' }).format(-days, 'day')
+}
 
 export function KitMenu() {
-  const { t, locale, setLocale } = useI18n()
+  const { t, locale, setLocale, productName } = useI18n()
   const {
     kits,
     activeKitId,
@@ -18,6 +42,9 @@ export function KitMenu() {
     updateActiveKit,
     joinKitBySyncCode,
     syncNow,
+    lastSyncedAt,
+    deleteKit,
+    importKitData,
   } = useKitTracker()
 
   const menuRef = useRef<HTMLDivElement>(null)
@@ -29,6 +56,9 @@ export function KitMenu() {
   const [copiedCode, setCopiedCode] = useState(false)
   const [copiedLink, setCopiedLink] = useState(false)
   const [isBusy, setIsBusy] = useState(false)
+  const [showCatalog, setShowCatalog] = useState(false)
+  const [importMessage, setImportMessage] = useState<'success' | 'error' | null>(null)
+  const importInputRef = useRef<HTMLInputElement>(null)
 
   const syncId = activeKit?.syncId ?? null
   const inviteLink = syncId ? buildInviteLink(syncId) : null
@@ -115,7 +145,58 @@ export function KitMenu() {
   function selectKit(kitId: string) {
     switchKit(kitId)
     setShowAddForm(false)
+    setShowCatalog(false)
+    setImportMessage(null)
   }
+
+  function handleExportJson() {
+    if (!activeKit) return
+    const safeName = activeKit.name.replace(/[^\w.-]+/g, '_') || 'kit'
+    downloadTextFile(
+      `${safeName}-baby-food.json`,
+      kitExportToJson(activeKit),
+      'application/json',
+    )
+  }
+
+  function handleExportCsv() {
+    if (!activeKit) return
+    const safeName = activeKit.name.replace(/[^\w.-]+/g, '_') || 'kit'
+    downloadTextFile(
+      `${safeName}-baby-food.csv`,
+      kitExportToCsv(activeKit, (id) => productName(id)),
+      'text/csv',
+    )
+  }
+
+  function handleImportFile(event: React.ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0]
+    event.target.value = ''
+    if (!file) return
+    const reader = new FileReader()
+    reader.onload = () => {
+      const text = typeof reader.result === 'string' ? reader.result : ''
+      const data = parseKitImport(text)
+      if (!data) {
+        setImportMessage('error')
+        return
+      }
+      const ok = importKitData(data)
+      setImportMessage(ok ? 'success' : 'error')
+    }
+    reader.readAsText(file)
+  }
+
+  function handleDeleteKit() {
+    if (!activeKit) return
+    if (!window.confirm(t.kitDeleteConfirm)) return
+    deleteKit(activeKit.id)
+    setOpen(false)
+  }
+
+  const lastSyncedLabel = lastSyncedAt
+    ? t.syncLastSynced(formatSyncAgo(lastSyncedAt, locale))
+    : t.syncNeverSynced
 
   return (
     <div className="header-controls" ref={menuRef}>
@@ -213,6 +294,62 @@ export function KitMenu() {
                     />
                   </label>
                   {ageLabel && <p className="kit-menu__age">{ageLabel}</p>}
+
+                  <div className="kit-menu__catalog">
+                    <button
+                      type="button"
+                      className="kit-menu__catalog-toggle"
+                      onClick={() => setShowCatalog((v) => !v)}
+                      aria-expanded={showCatalog}
+                    >
+                      <span>{t.catalogToggleLabel}</span>
+                      <span aria-hidden="true">{showCatalog ? '▴' : '▾'}</span>
+                    </button>
+                    {showCatalog && <ProductCatalogPanel />}
+                  </div>
+
+                  <div className="kit-menu__export">
+                    <p className="kit-menu__section-title">{t.exportTitle}</p>
+                    <div className="kit-menu__export-row">
+                      <button type="button" className="btn btn--ghost" onClick={handleExportJson}>
+                        {t.exportJson}
+                      </button>
+                      <button type="button" className="btn btn--ghost" onClick={handleExportCsv}>
+                        {t.exportCsv}
+                      </button>
+                    </div>
+                    <label className="kit-menu__field">
+                      <span>{t.importLabel}</span>
+                      <div className="kit-menu__export-row">
+                        <input
+                          ref={importInputRef}
+                          type="file"
+                          accept="application/json,.json"
+                          className="kit-menu__file"
+                          onChange={handleImportFile}
+                        />
+                        <button
+                          type="button"
+                          className="btn btn--ghost"
+                          onClick={() => importInputRef.current?.click()}
+                        >
+                          {t.importButton}
+                        </button>
+                      </div>
+                    </label>
+                    {importMessage === 'success' && (
+                      <p className="kit-menu__import-ok">{t.importSuccess}</p>
+                    )}
+                    {importMessage === 'error' && (
+                      <p className="kit-menu__error">{t.importError}</p>
+                    )}
+                  </div>
+
+                  {kits.length > 1 && (
+                    <button type="button" className="kit-menu__delete" onClick={handleDeleteKit}>
+                      {t.kitDelete}
+                    </button>
+                  )}
                 </div>
               )
             )}
@@ -263,6 +400,8 @@ export function KitMenu() {
                       {statusLabel}
                     </p>
                   )}
+
+                  <p className="kit-menu__sync-time">{lastSyncedLabel}</p>
 
                   <button
                     type="button"

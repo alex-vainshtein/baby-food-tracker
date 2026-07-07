@@ -10,15 +10,14 @@ interface ProgressBarProps {
 export function ProgressBar({ products, triedCount }: ProgressBarProps) {
   const { t } = useI18n()
   const total = products.length
-  const percent = Math.min(100, Math.round((triedCount / GOAL_COUNT) * 100))
+  const goal = Math.min(GOAL_COUNT, Math.max(total, 1))
+  const percent = Math.min(100, Math.round((triedCount / goal) * 100))
 
   return (
     <div className="progress-bar">
       <div className="progress-bar__header">
         <span className="progress-bar__title">{t.progressTitle}</span>
-        <span className="progress-bar__count">
-          {triedCount} / ~{GOAL_COUNT}
-        </span>
+        <span className="progress-bar__count">{t.progressGoal(triedCount, goal)}</span>
       </div>
       <div className="progress-bar__track">
         <div className="progress-bar__fill" style={{ width: `${percent}%` }} />

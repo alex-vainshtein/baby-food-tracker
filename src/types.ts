@@ -9,6 +9,13 @@ export type FoodCategory =
   | 'fat'
   | 'allergen'
 
+export interface CustomProduct {
+  id: string
+  name: string
+  category: FoodCategory
+  isAllergen: boolean
+}
+
 export interface Product {
   id: string
   category: FoodCategory
@@ -36,6 +43,8 @@ export interface Kit {
   syncId: string
   state: TrackerState
   menuDayOverride?: number | null
+  excludedProductIds?: string[]
+  customProducts?: CustomProduct[]
 }
 
 export interface KitsData {
@@ -46,6 +55,9 @@ export interface KitsData {
 export interface KitMeta {
   name: string
   dateOfBirth: string
+  excludedProductIds?: string[]
+  customProducts?: CustomProduct[]
+  menuDayOverride?: number | null
 }
 
 export const KITS_STORAGE_KEY = 'baby-food-tracker-kits'

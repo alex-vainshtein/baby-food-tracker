@@ -67,3 +67,7 @@ export function resolveMenuComponents(components: string[]): ResolvedMenuFood[] 
   }
   return resolved
 }
+
+export function resolveMenuLabelToId(label: string): string | null {
+  return MENU_NAME_TO_ID[label.trim().toLowerCase()] ?? null
+}

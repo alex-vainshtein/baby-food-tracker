@@ -1,6 +1,5 @@
 import { useMemo, useState } from 'react'
-import productsData from '../../data/products.json'
-import type { FoodCategory, Product, SortDirection, SortField } from '../types'
+import type { FoodCategory, SortDirection, SortField } from '../types'
 import { useKitTracker } from '../hooks/KitTrackerContext'
 import { useI18n } from '../i18n/I18nContext'
 import { calcAgeInMonths } from '../storage/kitAge'
@@ -9,8 +8,9 @@ import { FoodRow } from './FoodRow'
 import { ProgressBar } from './ProgressBar'
 import { KitMenu } from './KitMenu'
 import { DayRecommendations } from './DayRecommendations'
-
-const products = productsData as Product[]
+import { TodaySummary } from './TodaySummary'
+import { FeedingGuidelines } from './FeedingGuidelines'
+import { AllergenTracker } from './AllergenTracker'
 
 const LOCALE_MAP: Record<string, string> = {
   uk: 'uk',
@@ -20,8 +20,19 @@ const LOCALE_MAP: Record<string, string> = {
 }
 
 export function FoodTable() {
-  const { getTracking, increment, decrement, giveToday, activeKit } = useKitTracker()
-  const { t, productName, locale } = useI18n()
+  const {
+    kitProducts,
+    trackedProducts,
+    getTracking,
+    getProductDisplayName,
+    isProductExcluded,
+    increment,
+    decrement,
+    giveToday,
+    setProductNotes,
+    activeKit,
+  } = useKitTracker()
+  const { t, locale } = useI18n()
 
   const [search, setSearch] = useState('')
   const [category, setCategory] = useState<FoodCategory | 'all'>('all')
@@ -44,15 +55,15 @@ export function FoodTable() {
   }, [activeKit, t])
 
   const triedCount = useMemo(
-    () => products.filter((p) => getTracking(p.id).count >= 1).length,
-    [getTracking],
+    () => trackedProducts.filter((p) => getTracking(p.id).count >= 1).length,
+    [trackedProducts, getTracking],
   )
 
   const filteredProducts = useMemo(() => {
     const query = search.trim().toLowerCase()
 
-    let result = products.filter((p) => {
-      const name = productName(p.id).toLowerCase()
+    let result = kitProducts.filter((p) => {
+      const name = getProductDisplayName(p.id).toLowerCase()
       if (query && !name.includes(query)) return false
       if (category !== 'all' && p.category !== category) return false
       if (untriedOnly && getTracking(p.id).count > 0) return false
@@ -69,7 +80,7 @@ export function FoodTable() {
 
       switch (sortField) {
         case 'name':
-          cmp = productName(a.id).localeCompare(productName(b.id), collatorLocale)
+          cmp = getProductDisplayName(a.id).localeCompare(getProductDisplayName(b.id), collatorLocale)
           break
         case 'count':
           cmp = trackA.count - trackB.count
@@ -94,8 +105,9 @@ export function FoodTable() {
     sortField,
     sortDirection,
     getTracking,
-    productName,
+    getProductDisplayName,
     locale,
+    kitProducts,
   ])
 
   function handleSelectProduct(productId: string) {
@@ -124,9 +136,15 @@ export function FoodTable() {
         </div>
       </header>
 
-      <ProgressBar products={products} triedCount={triedCount} />
+      <ProgressBar products={trackedProducts} triedCount={triedCount} />
+
+      <TodaySummary onSelectProduct={handleSelectProduct} />
 
       <DayRecommendations onSelectProduct={handleSelectProduct} />
+
+      <FeedingGuidelines />
+
+      <AllergenTracker onSelectProduct={handleSelectProduct} />
 
       <Filters
         search={search}
@@ -167,6 +185,7 @@ export function FoodTable() {
                   key={product.id}
                   product={product}
                   tracking={getTracking(product.id)}
+                  excluded={isProductExcluded(product.id)}
                   ageMonths={ageMonths}
                   expanded={expandedId === product.id}
                   onToggle={() =>
@@ -175,6 +194,7 @@ export function FoodTable() {
                   onIncrement={() => increment(product.id)}
                   onDecrement={() => decrement(product.id)}
                   onGiveToday={() => giveToday(product.id)}
+                  onNotesChange={(notes) => setProductNotes(product.id, notes)}
                 />
               ))
             )}
@@ -183,7 +203,7 @@ export function FoodTable() {
       </div>
 
       <footer className="page-footer">
-        <p>{t.footerCount(filteredProducts.length, products.length)}</p>
+        <p>{t.footerCount(filteredProducts.length, kitProducts.length)}</p>
       </footer>
     </div>
   )
