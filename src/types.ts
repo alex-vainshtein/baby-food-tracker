@@ -1,0 +1,35 @@
+export type FoodCategory =
+  | 'meat'
+  | 'fish'
+  | 'vegetable'
+  | 'fruit'
+  | 'grain'
+  | 'legume'
+  | 'dairy'
+  | 'fat'
+  | 'allergen'
+
+export interface Product {
+  id: string
+  category: FoodCategory
+  inMenu: boolean
+  menuDays?: number[]
+  isAllergen: boolean
+  allergenGroup?: string
+}
+
+export interface ProductTracking {
+  count: number
+  lastGivenAt: string | null
+  notes?: string
+}
+
+export type TrackerState = Record<string, ProductTracking>
+
+export type SortField = 'name' | 'count' | 'lastGiven'
+export type SortDirection = 'asc' | 'desc'
+
+export const STORAGE_KEY = 'baby-food-tracker'
+export const SYNC_ID_STORAGE_KEY = 'baby-food-tracker-sync-id'
+export const SYNC_PANEL_COLLAPSED_KEY = 'baby-food-tracker-sync-collapsed'
+export const GOAL_COUNT = 100

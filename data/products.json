@@ -1,0 +1,887 @@
+[
+  {
+    "id": "kurka",
+    "category": "meat",
+    "inMenu": true,
+    "menuDays": [
+      1,
+      2,
+      7,
+      9,
+      14,
+      15,
+      29,
+      30
+    ],
+    "isAllergen": false
+  },
+  {
+    "id": "krolik",
+    "category": "meat",
+    "inMenu": true,
+    "menuDays": [
+      3,
+      4,
+      8,
+      12,
+      16,
+      18
+    ],
+    "isAllergen": false
+  },
+  {
+    "id": "indychka",
+    "category": "meat",
+    "inMenu": true,
+    "menuDays": [
+      5,
+      6,
+      10,
+      13
+    ],
+    "isAllergen": false
+  },
+  {
+    "id": "telyatyna",
+    "category": "meat",
+    "inMenu": true,
+    "menuDays": [
+      19,
+      20
+    ],
+    "isAllergen": false
+  },
+  {
+    "id": "svynyna",
+    "category": "meat",
+    "inMenu": true,
+    "menuDays": [
+      25,
+      26
+    ],
+    "isAllergen": false
+  },
+  {
+    "id": "pechinka",
+    "category": "meat",
+    "inMenu": true,
+    "menuDays": [
+      11,
+      24
+    ],
+    "isAllergen": false
+  },
+  {
+    "id": "yalovychyna",
+    "category": "meat",
+    "inMenu": false,
+    "isAllergen": false
+  },
+  {
+    "id": "baranyna",
+    "category": "meat",
+    "inMenu": false,
+    "isAllergen": false
+  },
+  {
+    "id": "hek",
+    "category": "fish",
+    "inMenu": true,
+    "menuDays": [
+      21,
+      22,
+      23
+    ],
+    "isAllergen": true,
+    "allergenGroup": "fish"
+  },
+  {
+    "id": "losos",
+    "category": "fish",
+    "inMenu": false,
+    "isAllergen": true,
+    "allergenGroup": "fish"
+  },
+  {
+    "id": "treska",
+    "category": "fish",
+    "inMenu": false,
+    "isAllergen": true,
+    "allergenGroup": "fish"
+  },
+  {
+    "id": "krevetky",
+    "category": "fish",
+    "inMenu": false,
+    "isAllergen": true,
+    "allergenGroup": "shellfish"
+  },
+  {
+    "id": "yaytse",
+    "category": "meat",
+    "inMenu": true,
+    "menuDays": [
+      28,
+      29,
+      30
+    ],
+    "isAllergen": true,
+    "allergenGroup": "egg"
+  },
+  {
+    "id": "indychache-yaytse",
+    "category": "meat",
+    "inMenu": false,
+    "isAllergen": true,
+    "allergenGroup": "egg"
+  },
+  {
+    "id": "brokoli",
+    "category": "vegetable",
+    "inMenu": true,
+    "menuDays": [
+      1,
+      2,
+      8,
+      9,
+      23
+    ],
+    "isAllergen": false
+  },
+  {
+    "id": "morkva",
+    "category": "vegetable",
+    "inMenu": true,
+    "menuDays": [
+      3,
+      4,
+      6,
+      7,
+      8,
+      10,
+      11,
+      14,
+      15,
+      16,
+      17,
+      19,
+      20,
+      21,
+      25,
+      26,
+      29,
+      30
+    ],
+    "isAllergen": false
+  },
+  {
+    "id": "tsvitna-kapusta",
+    "category": "vegetable",
+    "inMenu": true,
+    "menuDays": [
+      5,
+      6
+    ],
+    "isAllergen": false
+  },
+  {
+    "id": "synia-kapusta",
+    "category": "vegetable",
+    "inMenu": true,
+    "menuDays": [
+      19,
+      20,
+      30
+    ],
+    "isAllergen": false
+  },
+  {
+    "id": "bryusselska-kapusta",
+    "category": "vegetable",
+    "inMenu": true,
+    "menuDays": [
+      24,
+      25
+    ],
+    "isAllergen": false
+  },
+  {
+    "id": "buryak",
+    "category": "vegetable",
+    "inMenu": true,
+    "menuDays": [
+      10,
+      11,
+      15,
+      16
+    ],
+    "isAllergen": false
+  },
+  {
+    "id": "kartoplia",
+    "category": "vegetable",
+    "inMenu": true,
+    "menuDays": [
+      19,
+      27
+    ],
+    "isAllergen": false
+  },
+  {
+    "id": "kabachok",
+    "category": "vegetable",
+    "inMenu": false,
+    "isAllergen": false
+  },
+  {
+    "id": "harbuz",
+    "category": "vegetable",
+    "inMenu": false,
+    "isAllergen": false
+  },
+  {
+    "id": "ohirok",
+    "category": "vegetable",
+    "inMenu": false,
+    "isAllergen": false
+  },
+  {
+    "id": "pomidor",
+    "category": "vegetable",
+    "inMenu": false,
+    "isAllergen": false
+  },
+  {
+    "id": "shpynat",
+    "category": "vegetable",
+    "inMenu": false,
+    "isAllergen": false
+  },
+  {
+    "id": "zelenyi-horoshok",
+    "category": "vegetable",
+    "inMenu": false,
+    "isAllergen": false
+  },
+  {
+    "id": "struchkova-kvasolia",
+    "category": "vegetable",
+    "inMenu": true,
+    "menuDays": [
+      17,
+      18,
+      22
+    ],
+    "isAllergen": false
+  },
+  {
+    "id": "baklazhan",
+    "category": "vegetable",
+    "inMenu": false,
+    "isAllergen": false
+  },
+  {
+    "id": "redys",
+    "category": "vegetable",
+    "inMenu": false,
+    "isAllergen": false
+  },
+  {
+    "id": "pasternak",
+    "category": "vegetable",
+    "inMenu": false,
+    "isAllergen": false
+  },
+  {
+    "id": "selera",
+    "category": "vegetable",
+    "inMenu": false,
+    "isAllergen": true,
+    "allergenGroup": "celery"
+  },
+  {
+    "id": "tsybulia",
+    "category": "vegetable",
+    "inMenu": true,
+    "menuDays": [
+      11,
+      18,
+      19,
+      20,
+      24
+    ],
+    "isAllergen": false
+  },
+  {
+    "id": "chasnyk",
+    "category": "vegetable",
+    "inMenu": true,
+    "menuDays": [
+      25,
+      26
+    ],
+    "isAllergen": false
+  },
+  {
+    "id": "shampinioni",
+    "category": "vegetable",
+    "inMenu": false,
+    "isAllergen": false
+  },
+  {
+    "id": "perets-bolgarskyi",
+    "category": "vegetable",
+    "inMenu": true,
+    "menuDays": [
+      26,
+      27
+    ],
+    "isAllergen": false
+  },
+  {
+    "id": "banan",
+    "category": "fruit",
+    "inMenu": true,
+    "menuDays": [
+      2,
+      3,
+      9,
+      16
+    ],
+    "isAllergen": false
+  },
+  {
+    "id": "yabluko",
+    "category": "fruit",
+    "inMenu": true,
+    "menuDays": [
+      10,
+      11
+    ],
+    "isAllergen": false
+  },
+  {
+    "id": "grusha",
+    "category": "fruit",
+    "inMenu": false,
+    "isAllergen": false
+  },
+  {
+    "id": "kivi",
+    "category": "fruit",
+    "inMenu": true,
+    "menuDays": [
+      4,
+      5,
+      7,
+      14,
+      21,
+      25,
+      30
+    ],
+    "isAllergen": false
+  },
+  {
+    "id": "apelsyn",
+    "category": "fruit",
+    "inMenu": true,
+    "menuDays": [
+      6,
+      8,
+      15,
+      22,
+      26
+    ],
+    "isAllergen": false
+  },
+  {
+    "id": "mandaryn",
+    "category": "fruit",
+    "inMenu": true,
+    "menuDays": [
+      19,
+      20,
+      24,
+      27,
+      28
+    ],
+    "isAllergen": false
+  },
+  {
+    "id": "khurma",
+    "category": "fruit",
+    "inMenu": true,
+    "menuDays": [
+      12,
+      13,
+      23
+    ],
+    "isAllergen": false
+  },
+  {
+    "id": "vyshnia",
+    "category": "fruit",
+    "inMenu": true,
+    "menuDays": [
+      17,
+      18
+    ],
+    "isAllergen": false
+  },
+  {
+    "id": "vynohrad",
+    "category": "fruit",
+    "inMenu": false,
+    "isAllergen": false
+  },
+  {
+    "id": "persyk",
+    "category": "fruit",
+    "inMenu": false,
+    "isAllergen": false
+  },
+  {
+    "id": "abrykos",
+    "category": "fruit",
+    "inMenu": false,
+    "isAllergen": false
+  },
+  {
+    "id": "slyva",
+    "category": "fruit",
+    "inMenu": false,
+    "isAllergen": false
+  },
+  {
+    "id": "polunytsia",
+    "category": "fruit",
+    "inMenu": false,
+    "isAllergen": false
+  },
+  {
+    "id": "malyna",
+    "category": "fruit",
+    "inMenu": false,
+    "isAllergen": false
+  },
+  {
+    "id": "chornytsia",
+    "category": "fruit",
+    "inMenu": false,
+    "isAllergen": false
+  },
+  {
+    "id": "dynia",
+    "category": "fruit",
+    "inMenu": false,
+    "isAllergen": false
+  },
+  {
+    "id": "kavun",
+    "category": "fruit",
+    "inMenu": false,
+    "isAllergen": false
+  },
+  {
+    "id": "avokado",
+    "category": "fruit",
+    "inMenu": true,
+    "menuDays": [
+      12,
+      13,
+      28,
+      29
+    ],
+    "isAllergen": false
+  },
+  {
+    "id": "kuraha",
+    "category": "fruit",
+    "inMenu": true,
+    "menuDays": [
+      27,
+      29
+    ],
+    "isAllergen": false
+  },
+  {
+    "id": "chornoslyv",
+    "category": "fruit",
+    "inMenu": false,
+    "isAllergen": false
+  },
+  {
+    "id": "hrechka",
+    "category": "grain",
+    "inMenu": true,
+    "menuDays": [
+      4,
+      5,
+      15,
+      16,
+      30
+    ],
+    "isAllergen": false
+  },
+  {
+    "id": "rys",
+    "category": "grain",
+    "inMenu": true,
+    "menuDays": [
+      6
+    ],
+    "isAllergen": false
+  },
+  {
+    "id": "kukurudziana-kasha",
+    "category": "grain",
+    "inMenu": true,
+    "menuDays": [
+      2,
+      3,
+      10,
+      28,
+      29
+    ],
+    "isAllergen": false
+  },
+  {
+    "id": "pshenychna-kasha",
+    "category": "grain",
+    "inMenu": true,
+    "menuDays": [
+      7,
+      8,
+      9
+    ],
+    "isAllergen": true,
+    "allergenGroup": "gluten"
+  },
+  {
+    "id": "bulhur",
+    "category": "grain",
+    "inMenu": true,
+    "menuDays": [
+      11,
+      12
+    ],
+    "isAllergen": true,
+    "allergenGroup": "gluten"
+  },
+  {
+    "id": "yachna-kasha",
+    "category": "grain",
+    "inMenu": true,
+    "menuDays": [
+      17,
+      18,
+      21,
+      22
+    ],
+    "isAllergen": true,
+    "allergenGroup": "gluten"
+  },
+  {
+    "id": "vivsianka",
+    "category": "grain",
+    "inMenu": true,
+    "menuDays": [
+      20
+    ],
+    "isAllergen": false
+  },
+  {
+    "id": "kus-kus",
+    "category": "grain",
+    "inMenu": true,
+    "menuDays": [
+      23,
+      24
+    ],
+    "isAllergen": true,
+    "allergenGroup": "gluten"
+  },
+  {
+    "id": "pshono",
+    "category": "grain",
+    "inMenu": true,
+    "menuDays": [
+      25,
+      26
+    ],
+    "isAllergen": false
+  },
+  {
+    "id": "perlova",
+    "category": "grain",
+    "inMenu": false,
+    "isAllergen": true,
+    "allergenGroup": "gluten"
+  },
+  {
+    "id": "kinoa",
+    "category": "grain",
+    "inMenu": false,
+    "isAllergen": false
+  },
+  {
+    "id": "sochevycia",
+    "category": "legume",
+    "inMenu": true,
+    "menuDays": [
+      13,
+      14
+    ],
+    "isAllergen": false
+  },
+  {
+    "id": "kvasolia",
+    "category": "legume",
+    "inMenu": true,
+    "menuDays": [
+      27,
+      28
+    ],
+    "isAllergen": false
+  },
+  {
+    "id": "kvasolia-chervona",
+    "category": "legume",
+    "inMenu": false,
+    "isAllergen": false
+  },
+  {
+    "id": "nut",
+    "category": "legume",
+    "inMenu": false,
+    "isAllergen": false
+  },
+  {
+    "id": "mash",
+    "category": "legume",
+    "inMenu": false,
+    "isAllergen": false
+  },
+  {
+    "id": "moloko",
+    "category": "dairy",
+    "inMenu": true,
+    "menuDays": [
+      14,
+      15,
+      16
+    ],
+    "isAllergen": true,
+    "allergenGroup": "milk"
+  },
+  {
+    "id": "yogurt",
+    "category": "dairy",
+    "inMenu": false,
+    "isAllergen": true,
+    "allergenGroup": "milk"
+  },
+  {
+    "id": "syr",
+    "category": "dairy",
+    "inMenu": false,
+    "isAllergen": true,
+    "allergenGroup": "milk"
+  },
+  {
+    "id": "maslo",
+    "category": "dairy",
+    "inMenu": false,
+    "isAllergen": true,
+    "allergenGroup": "milk"
+  },
+  {
+    "id": "olyvkova-oliia",
+    "category": "fat",
+    "inMenu": true,
+    "menuDays": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      14,
+      15,
+      16,
+      17,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      30
+    ],
+    "isAllergen": false
+  },
+  {
+    "id": "harbuzova-oliia",
+    "category": "fat",
+    "inMenu": false,
+    "isAllergen": false
+  },
+  {
+    "id": "arahis",
+    "category": "allergen",
+    "inMenu": false,
+    "isAllergen": true,
+    "allergenGroup": "peanut"
+  },
+  {
+    "id": "migdal",
+    "category": "allergen",
+    "inMenu": false,
+    "isAllergen": true,
+    "allergenGroup": "tree_nut"
+  },
+  {
+    "id": "voloskyi-gorikh",
+    "category": "allergen",
+    "inMenu": false,
+    "isAllergen": true,
+    "allergenGroup": "tree_nut"
+  },
+  {
+    "id": "keshiu",
+    "category": "allergen",
+    "inMenu": false,
+    "isAllergen": true,
+    "allergenGroup": "tree_nut"
+  },
+  {
+    "id": "soia",
+    "category": "allergen",
+    "inMenu": false,
+    "isAllergen": true,
+    "allergenGroup": "soy"
+  },
+  {
+    "id": "kunzhut",
+    "category": "allergen",
+    "inMenu": false,
+    "isAllergen": true,
+    "allergenGroup": "sesame"
+  },
+  {
+    "id": "hirchytsia",
+    "category": "allergen",
+    "inMenu": false,
+    "isAllergen": true,
+    "allergenGroup": "mustard"
+  },
+  {
+    "id": "liupyn",
+    "category": "allergen",
+    "inMenu": false,
+    "isAllergen": true,
+    "allergenGroup": "lupin"
+  },
+  {
+    "id": "kachka",
+    "category": "meat",
+    "inMenu": false,
+    "isAllergen": false
+  },
+  {
+    "id": "sudak",
+    "category": "fish",
+    "inMenu": false,
+    "isAllergen": true,
+    "allergenGroup": "fish"
+  },
+  {
+    "id": "forel",
+    "category": "fish",
+    "inMenu": false,
+    "isAllergen": true,
+    "allergenGroup": "fish"
+  },
+  {
+    "id": "midii",
+    "category": "fish",
+    "inMenu": false,
+    "isAllergen": true,
+    "allergenGroup": "shellfish"
+  },
+  {
+    "id": "kalmar",
+    "category": "fish",
+    "inMenu": false,
+    "isAllergen": true,
+    "allergenGroup": "shellfish"
+  },
+  {
+    "id": "bila-kapusta",
+    "category": "vegetable",
+    "inMenu": false,
+    "isAllergen": false
+  },
+  {
+    "id": "kukurudza",
+    "category": "vegetable",
+    "inMenu": false,
+    "isAllergen": false
+  },
+  {
+    "id": "salat",
+    "category": "vegetable",
+    "inMenu": false,
+    "isAllergen": false
+  },
+  {
+    "id": "rukola",
+    "category": "vegetable",
+    "inMenu": false,
+    "isAllergen": false
+  },
+  {
+    "id": "manna-kasha",
+    "category": "grain",
+    "inMenu": false,
+    "isAllergen": true,
+    "allergenGroup": "gluten"
+  },
+  {
+    "id": "tofu",
+    "category": "legume",
+    "inMenu": false,
+    "isAllergen": true,
+    "allergenGroup": "soy"
+  },
+  {
+    "id": "fistashky",
+    "category": "allergen",
+    "inMenu": false,
+    "isAllergen": true,
+    "allergenGroup": "tree_nut"
+  },
+  {
+    "id": "funduk",
+    "category": "allergen",
+    "inMenu": false,
+    "isAllergen": true,
+    "allergenGroup": "tree_nut"
+  },
+  {
+    "id": "kefir",
+    "category": "dairy",
+    "inMenu": false,
+    "isAllergen": true,
+    "allergenGroup": "milk"
+  }
+]

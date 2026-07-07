@@ -1,0 +1,602 @@
+{
+  "kurka": {
+    "uk": "Курка",
+    "en": "Chicken",
+    "es": "Pollo",
+    "de": "Hähnchen"
+  },
+  "krolik": {
+    "uk": "Кролик",
+    "en": "Rabbit",
+    "es": "Conejo",
+    "de": "Kaninchen"
+  },
+  "indychka": {
+    "uk": "Індичка",
+    "en": "Turkey",
+    "es": "Pavo",
+    "de": "Pute"
+  },
+  "telyatyna": {
+    "uk": "Телятина",
+    "en": "Veal",
+    "es": "Ternera",
+    "de": "Kalbfleisch"
+  },
+  "svynyna": {
+    "uk": "Свинина",
+    "en": "Pork",
+    "es": "Cerdo",
+    "de": "Schweinefleisch"
+  },
+  "pechinka": {
+    "uk": "Печінка",
+    "en": "Liver",
+    "es": "Hígado",
+    "de": "Leber"
+  },
+  "yalovychyna": {
+    "uk": "Яловичина",
+    "en": "Beef",
+    "es": "Ternera",
+    "de": "Rindfleisch"
+  },
+  "baranyna": {
+    "uk": "Баранина",
+    "en": "Lamb",
+    "es": "Cordero",
+    "de": "Lamm"
+  },
+  "hek": {
+    "uk": "Хек",
+    "en": "Hake",
+    "es": "Merluza",
+    "de": "Seehecht"
+  },
+  "losos": {
+    "uk": "Лосось",
+    "en": "Salmon",
+    "es": "Salmón",
+    "de": "Lachs"
+  },
+  "treska": {
+    "uk": "Тріска",
+    "en": "Cod",
+    "es": "Bacalao",
+    "de": "Kabeljau"
+  },
+  "krevetky": {
+    "uk": "Креветки",
+    "en": "Shrimp",
+    "es": "Camarones",
+    "de": "Garnelen"
+  },
+  "yaytse": {
+    "uk": "Яйце",
+    "en": "Egg",
+    "es": "Huevo",
+    "de": "Ei"
+  },
+  "indychache-yaytse": {
+    "uk": "Індичаче яйце",
+    "en": "Turkey egg",
+    "es": "Huevo de pavo",
+    "de": "Puten-Ei"
+  },
+  "brokoli": {
+    "uk": "Броколі",
+    "en": "Broccoli",
+    "es": "Brócoli",
+    "de": "Brokkoli"
+  },
+  "morkva": {
+    "uk": "Морква",
+    "en": "Carrot",
+    "es": "Zanahoria",
+    "de": "Karotte"
+  },
+  "tsvitna-kapusta": {
+    "uk": "Цвітна капуста",
+    "en": "Cauliflower",
+    "es": "Coliflor",
+    "de": "Blumenkohl"
+  },
+  "synia-kapusta": {
+    "uk": "Синя капуста",
+    "en": "Red cabbage",
+    "es": "Col lombarda",
+    "de": "Rotkohl"
+  },
+  "bryusselska-kapusta": {
+    "uk": "Брюссельська капуста",
+    "en": "Brussels sprouts",
+    "es": "Coles de Bruselas",
+    "de": "Rosenkohl"
+  },
+  "buryak": {
+    "uk": "Буряк",
+    "en": "Beetroot",
+    "es": "Remolacha",
+    "de": "Rote Bete"
+  },
+  "kartoplia": {
+    "uk": "Картопля",
+    "en": "Potato",
+    "es": "Patata",
+    "de": "Kartoffel"
+  },
+  "kabachok": {
+    "uk": "Кабачок",
+    "en": "Zucchini",
+    "es": "Calabacín",
+    "de": "Zucchini"
+  },
+  "harbuz": {
+    "uk": "Гарбуз",
+    "en": "Pumpkin",
+    "es": "Calabaza",
+    "de": "Kürbis"
+  },
+  "ohirok": {
+    "uk": "Огірок",
+    "en": "Cucumber",
+    "es": "Pepino",
+    "de": "Gurke"
+  },
+  "pomidor": {
+    "uk": "Помідор",
+    "en": "Tomato",
+    "es": "Tomate",
+    "de": "Tomate"
+  },
+  "shpynat": {
+    "uk": "Шпинат",
+    "en": "Spinach",
+    "es": "Espinaca",
+    "de": "Spinat"
+  },
+  "zelenyi-horoshok": {
+    "uk": "Зелений горошок",
+    "en": "Green peas",
+    "es": "Guisantes",
+    "de": "Erbsen"
+  },
+  "struchkova-kvasolia": {
+    "uk": "Стручкова квасоля",
+    "en": "Green beans",
+    "es": "Judías verdes",
+    "de": "Grüne Bohnen"
+  },
+  "baklazhan": {
+    "uk": "Баклажан",
+    "en": "Eggplant",
+    "es": "Berenjena",
+    "de": "Aubergine"
+  },
+  "redys": {
+    "uk": "Редис",
+    "en": "Radish",
+    "es": "Rábano",
+    "de": "Rettich"
+  },
+  "pasternak": {
+    "uk": "Пастернак",
+    "en": "Parsnip",
+    "es": "Chirivía",
+    "de": "Pastinake"
+  },
+  "selera": {
+    "uk": "Селера",
+    "en": "Celery",
+    "es": "Apio",
+    "de": "Sellerie"
+  },
+  "tsybulia": {
+    "uk": "Цибуля",
+    "en": "Onion",
+    "es": "Cebolla",
+    "de": "Zwiebel"
+  },
+  "chasnyk": {
+    "uk": "Часник",
+    "en": "Garlic",
+    "es": "Ajo",
+    "de": "Knoblauch"
+  },
+  "shampinioni": {
+    "uk": "Шампіньйони",
+    "en": "Mushrooms",
+    "es": "Champiñones",
+    "de": "Champignons"
+  },
+  "perets-bolgarskyi": {
+    "uk": "Перець болгарський",
+    "en": "Bell pepper",
+    "es": "Pimiento",
+    "de": "Paprika"
+  },
+  "banan": {
+    "uk": "Банан",
+    "en": "Banana",
+    "es": "Plátano",
+    "de": "Banane"
+  },
+  "yabluko": {
+    "uk": "Яблуко",
+    "en": "Apple",
+    "es": "Manzana",
+    "de": "Apfel"
+  },
+  "grusha": {
+    "uk": "Груша",
+    "en": "Pear",
+    "es": "Pera",
+    "de": "Birne"
+  },
+  "kivi": {
+    "uk": "Ківі",
+    "en": "Kiwi",
+    "es": "Kiwi",
+    "de": "Kiwi"
+  },
+  "apelsyn": {
+    "uk": "Апельсин",
+    "en": "Orange",
+    "es": "Naranja",
+    "de": "Orange"
+  },
+  "mandaryn": {
+    "uk": "Мандарин",
+    "en": "Mandarin",
+    "es": "Mandarina",
+    "de": "Mandarine"
+  },
+  "khurma": {
+    "uk": "Хурма",
+    "en": "Persimmon",
+    "es": "Caqui",
+    "de": "Kaki"
+  },
+  "vyshnia": {
+    "uk": "Вишня",
+    "en": "Cherry",
+    "es": "Cereza",
+    "de": "Kirsche"
+  },
+  "vynohrad": {
+    "uk": "Виноград",
+    "en": "Grapes",
+    "es": "Uvas",
+    "de": "Trauben"
+  },
+  "persyk": {
+    "uk": "Персик",
+    "en": "Peach",
+    "es": "Melocotón",
+    "de": "Pfirsich"
+  },
+  "abrykos": {
+    "uk": "Абрикос",
+    "en": "Apricot",
+    "es": "Albaricoque",
+    "de": "Aprikose"
+  },
+  "slyva": {
+    "uk": "Слива",
+    "en": "Plum",
+    "es": "Ciruela",
+    "de": "Pflaume"
+  },
+  "polunytsia": {
+    "uk": "Полуниця",
+    "en": "Strawberry",
+    "es": "Fresa",
+    "de": "Erdbeere"
+  },
+  "malyna": {
+    "uk": "Малина",
+    "en": "Raspberry",
+    "es": "Frambuesa",
+    "de": "Himbeere"
+  },
+  "chornytsia": {
+    "uk": "Чорниця",
+    "en": "Blueberry",
+    "es": "Arándano",
+    "de": "Heidelbeere"
+  },
+  "dynia": {
+    "uk": "Диня",
+    "en": "Melon",
+    "es": "Melón",
+    "de": "Melone"
+  },
+  "kavun": {
+    "uk": "Кавун",
+    "en": "Watermelon",
+    "es": "Sandía",
+    "de": "Wassermelone"
+  },
+  "avokado": {
+    "uk": "Авокадо",
+    "en": "Avocado",
+    "es": "Aguacate",
+    "de": "Avocado"
+  },
+  "kuraha": {
+    "uk": "Курага",
+    "en": "Dried apricot",
+    "es": "Orejones",
+    "de": "Aprikose getrocknet"
+  },
+  "chornoslyv": {
+    "uk": "Чорнослив",
+    "en": "Prune",
+    "es": "Ciruela pasa",
+    "de": "Pflaume getrocknet"
+  },
+  "hrechka": {
+    "uk": "Гречка",
+    "en": "Buckwheat",
+    "es": "Alforfón",
+    "de": "Buchweizen"
+  },
+  "rys": {
+    "uk": "Рис",
+    "en": "Rice",
+    "es": "Arroz",
+    "de": "Reis"
+  },
+  "kukurudziana-kasha": {
+    "uk": "Кукурудзяна каша",
+    "en": "Corn porridge",
+    "es": "Gachas de maíz",
+    "de": "Maisbrei"
+  },
+  "pshenychna-kasha": {
+    "uk": "Пшенична каша",
+    "en": "Wheat porridge",
+    "es": "Gachas de trigo",
+    "de": "Weizenbrei"
+  },
+  "bulhur": {
+    "uk": "Булгур",
+    "en": "Bulgur",
+    "es": "Bulgur",
+    "de": "Bulgur"
+  },
+  "yachna-kasha": {
+    "uk": "Ячна каша",
+    "en": "Barley porridge",
+    "es": "Gachas de cebada",
+    "de": "Gerstenbrei"
+  },
+  "vivsianka": {
+    "uk": "Вівсянка",
+    "en": "Oatmeal",
+    "es": "Avena",
+    "de": "Haferflocken"
+  },
+  "kus-kus": {
+    "uk": "Кус-кус",
+    "en": "Couscous",
+    "es": "Cuscús",
+    "de": "Couscous"
+  },
+  "pshono": {
+    "uk": "Пшоно",
+    "en": "Millet",
+    "es": "Mijo",
+    "de": "Hirse"
+  },
+  "perlova": {
+    "uk": "Перлова каша",
+    "en": "Pearl barley",
+    "es": "Cebada perlada",
+    "de": "Perlgraupen"
+  },
+  "kinoa": {
+    "uk": "Кіноа",
+    "en": "Quinoa",
+    "es": "Quinoa",
+    "de": "Quinoa"
+  },
+  "sochevycia": {
+    "uk": "Сочевиця",
+    "en": "Lentils",
+    "es": "Lentejas",
+    "de": "Linsen"
+  },
+  "kvasolia": {
+    "uk": "Квасоля",
+    "en": "Beans",
+    "es": "Judías",
+    "de": "Bohnen"
+  },
+  "kvasolia-chervona": {
+    "uk": "Квасоля червона",
+    "en": "Kidney beans",
+    "es": "Judías rojas",
+    "de": "Rote Bohnen"
+  },
+  "nut": {
+    "uk": "Нут",
+    "en": "Chickpeas",
+    "es": "Garbanzos",
+    "de": "Kichererbsen"
+  },
+  "mash": {
+    "uk": "Маш",
+    "en": "Mung beans",
+    "es": "Frijoles mungo",
+    "de": "Mungbohnen"
+  },
+  "moloko": {
+    "uk": "Молоко",
+    "en": "Milk",
+    "es": "Leche",
+    "de": "Milch"
+  },
+  "yogurt": {
+    "uk": "Йогурт",
+    "en": "Yogurt",
+    "es": "Yogur",
+    "de": "Joghurt"
+  },
+  "syr": {
+    "uk": "Сир",
+    "en": "Cheese",
+    "es": "Queso",
+    "de": "Käse"
+  },
+  "maslo": {
+    "uk": "Масло",
+    "en": "Butter",
+    "es": "Mantequilla",
+    "de": "Butter"
+  },
+  "olyvkova-oliia": {
+    "uk": "Оливкова олія",
+    "en": "Olive oil",
+    "es": "Aceite de oliva",
+    "de": "Olivenöl"
+  },
+  "harbuzova-oliia": {
+    "uk": "Гарбузова олія",
+    "en": "Pumpkin seed oil",
+    "es": "Aceite de calabaza",
+    "de": "Kürbiskernöl"
+  },
+  "arahis": {
+    "uk": "Арахіс",
+    "en": "Peanut",
+    "es": "Cacahuete",
+    "de": "Erdnuss"
+  },
+  "migdal": {
+    "uk": "Мигдаль",
+    "en": "Almond",
+    "es": "Almendra",
+    "de": "Mandel"
+  },
+  "voloskyi-gorikh": {
+    "uk": "Волоський горіх",
+    "en": "Walnut",
+    "es": "Nuez",
+    "de": "Walnuss"
+  },
+  "keshiu": {
+    "uk": "Кеш'ю",
+    "en": "Cashew",
+    "es": "Anacardo",
+    "de": "Cashew"
+  },
+  "soia": {
+    "uk": "Соя",
+    "en": "Soy",
+    "es": "Soja",
+    "de": "Soja"
+  },
+  "kunzhut": {
+    "uk": "Кунжут",
+    "en": "Sesame",
+    "es": "Sésamo",
+    "de": "Sesam"
+  },
+  "hirchytsia": {
+    "uk": "Гірчиця",
+    "en": "Mustard",
+    "es": "Mostaza",
+    "de": "Senf"
+  },
+  "liupyn": {
+    "uk": "Люпин",
+    "en": "Lupin",
+    "es": "Altramuz",
+    "de": "Lupine"
+  },
+  "kachka": {
+    "uk": "Качка",
+    "en": "Duck",
+    "es": "Pato",
+    "de": "Ente"
+  },
+  "sudak": {
+    "uk": "Судак",
+    "en": "Pike perch",
+    "es": "Lucioperca",
+    "de": "Zander"
+  },
+  "forel": {
+    "uk": "Форель",
+    "en": "Trout",
+    "es": "Trucha",
+    "de": "Forelle"
+  },
+  "midii": {
+    "uk": "Мідії",
+    "en": "Mussels",
+    "es": "Mejillones",
+    "de": "Muscheln"
+  },
+  "kalmar": {
+    "uk": "Кальмар",
+    "en": "Squid",
+    "es": "Calamar",
+    "de": "Tintenfisch"
+  },
+  "bila-kapusta": {
+    "uk": "Біла капуста",
+    "en": "White cabbage",
+    "es": "Col blanca",
+    "de": "Weißkohl"
+  },
+  "kukurudza": {
+    "uk": "Кукурудза",
+    "en": "Corn",
+    "es": "Maíz",
+    "de": "Mais"
+  },
+  "salat": {
+    "uk": "Салат",
+    "en": "Lettuce",
+    "es": "Lechuga",
+    "de": "Salat"
+  },
+  "rukola": {
+    "uk": "Рукола",
+    "en": "Arugula",
+    "es": "Rúcula",
+    "de": "Rucola"
+  },
+  "manna-kasha": {
+    "uk": "Манна каша",
+    "en": "Semolina porridge",
+    "es": "Gachas de sémola",
+    "de": "Grießbrei"
+  },
+  "tofu": {
+    "uk": "Тофу",
+    "en": "Tofu",
+    "es": "Tofu",
+    "de": "Tofu"
+  },
+  "fistashky": {
+    "uk": "Фісташки",
+    "en": "Pistachio",
+    "es": "Pistacho",
+    "de": "Pistazie"
+  },
+  "funduk": {
+    "uk": "Фундук",
+    "en": "Hazelnut",
+    "es": "Avellana",
+    "de": "Haselnuss"
+  },
+  "kefir": {
+    "uk": "Кефір",
+    "en": "Kefir",
+    "es": "Kéfir",
+    "de": "Kefir"
+  }
+}
