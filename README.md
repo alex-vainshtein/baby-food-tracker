@@ -15,6 +15,7 @@ Runs as a static web app with optional cloud sync via Netlify.
 - **Filters:** search, category, not tried yet, allergens only
 - **4 languages:** Ukrainian (default), English, Spanish, German
 - **Cross-device sync** — share a sync code between phone and laptop
+- **Daily recommendations** — age-based tips and suggested foods for today
 - **Offline** after first load (local cache always kept)
 
 ## Quick start
@@ -89,7 +90,7 @@ Treat the sync code like a password — anyone with it can read or edit your log
 
 ```
 data/
-  knowledge-base.json   # 30-day menu, allergen schedule, feeding rules
+  knowledge-base.json   # feeding principles, allergen schedule, daily plan
   products.json         # 100 products (metadata)
   product-names.json    # Product names in UK / EN / ES / DE
 netlify/
@@ -106,10 +107,6 @@ src/
 - [Vite](https://vitejs.dev/) + [React](https://react.dev/) + TypeScript
 - [Netlify Functions](https://docs.netlify.com/build/functions/overview/) + [Netlify Blobs](https://docs.netlify.com/build/data-and-storage/netlify-blobs/) for sync
 - Mobile-first CSS, no UI framework
-
-## License & source material
-
-Feeding guidance and the 30-day menu are from the *Мінікурс 6 міс* mini-course by Сасадеуш Альона ([@prukorm.tarilochku](https://instagram.com/prukorm.tarilochku)). The PDF is included for personal reference only.
 
 ---
 

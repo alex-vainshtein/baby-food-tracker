@@ -12,6 +12,7 @@ import type { Kit, KitMeta, KitsData, ProductTracking, TrackerState } from '../t
 import { useI18n } from '../i18n/I18nContext'
 import { mergeTrackerState } from '../storage/mergeState'
 import { createKit, loadKits, saveKits } from '../storage/kitsStorage'
+import { PLAN_LENGTH_DAYS } from '../storage/menuDay'
 import {
   clearJoinParamFromUrl,
   isValidSyncId,
@@ -51,6 +52,7 @@ interface KitTrackerContextValue {
   switchKit: (kitId: string) => void
   addKit: (name: string, dateOfBirth: string) => Promise<void>
   updateActiveKit: (patch: Partial<Pick<Kit, 'name' | 'dateOfBirth'>>) => void
+  setMenuDay: (day: number) => void
   joinKitBySyncCode: (rawCode: string) => Promise<boolean>
   syncNow: () => Promise<void>
 }
@@ -308,7 +310,21 @@ export function KitTrackerProvider({ children }: { children: ReactNode }) {
     (patch: Partial<Pick<Kit, 'name' | 'dateOfBirth'>>) => {
       const kitId = kitsDataRef.current.activeKitId
       if (!kitId) return
-      updateKitById(kitId, (kit) => ({ ...kit, ...patch }))
+      updateKitById(kitId, (kit) => ({
+        ...kit,
+        ...patch,
+        ...(patch.dateOfBirth !== undefined ? { menuDayOverride: null } : {}),
+      }))
+    },
+    [updateKitById],
+  )
+
+  const setMenuDay = useCallback(
+    (day: number) => {
+      const kitId = kitsDataRef.current.activeKitId
+      if (!kitId) return
+      const clamped = Math.min(PLAN_LENGTH_DAYS, Math.max(1, day))
+      updateKitById(kitId, (kit) => ({ ...kit, menuDayOverride: clamped }))
     },
     [updateKitById],
   )
@@ -333,6 +349,7 @@ export function KitTrackerProvider({ children }: { children: ReactNode }) {
     switchKit,
     addKit,
     updateActiveKit,
+    setMenuDay,
     joinKitBySyncCode,
     syncNow,
   }

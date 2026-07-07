@@ -35,6 +35,7 @@ export interface Kit {
   dateOfBirth: string
   syncId: string
   state: TrackerState
+  menuDayOverride?: number | null
 }
 
 export interface KitsData {

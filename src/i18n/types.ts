@@ -79,11 +79,26 @@ export interface UiStrings {
   kitAdd: string
   kitCancelAdd: string
   kitCreate: string
+  kitEditLabel: string
   kitNameLabel: string
   kitNamePlaceholder: string
   kitDobLabel: string
   kitAgeMonths: (months: number) => string
   kitSubtitle: (name: string) => string
   kitSubtitleWithAge: (name: string, months: number) => string
+  productGuidanceLabel: string
+  dayRecTitle: string
+  dayRecDayLabel: (day: number) => string
+  dayRecPrevDay: string
+  dayRecNextDay: string
+  dayRecAllergen: (info: string) => string
+  dayRecMorningTip: string
+  dayRecTexture: (age: number, texture: string) => string
+  dayRecNoDob: string
+  dayRecFoodsLabel: string
+  dayRecNew: string
+  dayRecFocusUntried: (names: string) => string
+  dayRecAllNew: string
+  dayRecPlanComplete: string
   categories: Record<string, string>
 }

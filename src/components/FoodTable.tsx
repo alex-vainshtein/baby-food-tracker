@@ -7,9 +7,8 @@ import { calcAgeInMonths } from '../storage/kitAge'
 import { Filters } from './Filters'
 import { FoodRow } from './FoodRow'
 import { ProgressBar } from './ProgressBar'
-import { LanguageSwitcher } from './LanguageSwitcher'
-import { KitSwitcher } from './KitSwitcher'
-import { SyncPanel } from './SyncPanel'
+import { KitMenu } from './KitMenu'
+import { DayRecommendations } from './DayRecommendations'
 
 const products = productsData as Product[]
 
@@ -30,6 +29,12 @@ export function FoodTable() {
   const [allergensOnly, setAllergensOnly] = useState(false)
   const [sortField, setSortField] = useState<SortField>('name')
   const [sortDirection, setSortDirection] = useState<SortDirection>('asc')
+  const [expandedId, setExpandedId] = useState<string | null>(null)
+
+  const ageMonths = useMemo(
+    () => (activeKit ? calcAgeInMonths(activeKit.dateOfBirth) : null),
+    [activeKit],
+  )
 
   const subtitle = useMemo(() => {
     if (!activeKit) return t.pageSubtitle
@@ -93,6 +98,20 @@ export function FoodTable() {
     locale,
   ])
 
+  function handleSelectProduct(productId: string) {
+    setSearch('')
+    setCategory('all')
+    setUntriedOnly(false)
+    setAllergensOnly(false)
+    setExpandedId(productId)
+    window.setTimeout(() => {
+      document.getElementById(`food-row-${productId}`)?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+      })
+    }, 50)
+  }
+
   return (
     <div className="food-table-page">
       <header className="page-header">
@@ -101,15 +120,13 @@ export function FoodTable() {
             <h1>{t.pageTitle}</h1>
             <p className="page-header__subtitle">{subtitle}</p>
           </div>
-          <LanguageSwitcher />
+          <KitMenu />
         </div>
       </header>
 
-      <KitSwitcher />
-
       <ProgressBar products={products} triedCount={triedCount} />
 
-      <SyncPanel />
+      <DayRecommendations onSelectProduct={handleSelectProduct} />
 
       <Filters
         search={search}
@@ -150,6 +167,11 @@ export function FoodTable() {
                   key={product.id}
                   product={product}
                   tracking={getTracking(product.id)}
+                  ageMonths={ageMonths}
+                  expanded={expandedId === product.id}
+                  onToggle={() =>
+                    setExpandedId((id) => (id === product.id ? null : product.id))
+                  }
                   onIncrement={() => increment(product.id)}
                   onDecrement={() => decrement(product.id)}
                   onGiveToday={() => giveToday(product.id)}
